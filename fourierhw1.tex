@@ -1,0 +1,415 @@
+\documentclass[12pt]{article}
+\setlength\headheight{14.5pt}
+\title{Homework}
+\author{Frederick Robinson}
+\date{16 November 2009}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+
+\begin{document}
+
+\lhead{Frederick Robinson}
+\rhead{Math 381: Fourier Analysis}
+
+\maketitle
+
+\setcounter{tocdepth}{2} 
+
+\tableofcontents
+
+\section{Chapter 4 Section 1}
+
+\subsection{Problem 9}\label{4.1.9}
+Show that the general solution of $\nabla^2\left[f(r)\right]=0$ is $f(r)=A+B/r$ for arbitrary constants $A, B$.
+
+We have \cite[Page 237]{pinsky} by 4.1.5 that
+
+\begin{equation}\label{laplacian}\nabla^2u=u_{rr}+\frac{2}{r}u_r+\frac{1}{r^2}(u_{\theta\theta}+\cot{\theta}u_\theta+\csc^2{\theta}u_{\varphi\varphi})\end{equation}
+
+but, since $u(r)$ depends only on $r$ we have that
+
+\[\nabla^2\left[f(r)\right]=0\]
+\[\iff u_{rr}+\frac{2}{r}u_r+\frac{1}{r^2}(u_{\theta\theta}+\cot{\theta}u_\theta+\csc^2{\theta}u_{\varphi\varphi})=0\]
+\[\iff f''(r)+\frac{2}{r}f'(r)=0\]
+
+but this is just an ordinary differential equation, whose solution we know to be
+
+\begin{equation}\label{homo}f(r)=A+\frac{B}{r}\end{equation}
+
+So we have shown that the general solution of $\nabla^2\left[f(r)\right]=0$ is $f(r)=A+B/r$ for arbitrary constants $A, B$ as desired.
+
+\subsection{Problem 11}
+
+Solve the equation $\nabla^2\left[f(r)\right]=-1$ with the boundary conditions $f(a)=0$ and $f(0)$  finite.
+
+From Exercise 10 \cite[Page 250]{pinsky} we know that the general solution for differential equations of this form is given by
+
+\[f(r)=A+\frac{B}{r}-\frac{r^2}{6}\] for arbitrary constants $A, B$.
+
+Now we apply our boundary conditions to determine $A, B$. Since $f(0)$ is finite we know that $B=0$. Thus,
+
+\[f(a)=A+\frac{B}{a}-\frac{a^2}{6}=0\]
+\[\Rightarrow 6Aa+6B-a^3=0\]
+\[\Rightarrow 6A-a^2=0\]
+\[\Rightarrow 6A=a^2\]
+\[\Rightarrow A=\frac{a^2}{6}\]
+
+Since we have determined $A=\frac{a^2}{6}$ and $B=0$ the particular solution of the equation $\nabla^2\left[f(r)\right]=-1$ with the boundary conditions $f(a)=0$ and $f(0)$  finite is given by:
+
+\[f(r)=\frac{a^2}{6}-\frac{r^2}{6}\]
+\[=\frac{a^2-r^2}{6}\]
+
+\subsection{Problem 13}
+
+Solve the equation $\nabla^2\left[f(r)\right]=-r^4$ with the boundary condition $f(a)=0$ and $f(0)$ finite.
+
+We employ Equation \ref{laplacian} to reduce the general problem to that of an ordinary differential equation as in Problem 9 (\ref{4.1.9}).
+
+\[\nabla^2\left[f(r)\right]=-r^4\]
+\[\iff u_{rr}+\frac{2}{r}u_r+\frac{1}{r^2}(u_{\theta\theta}+\cot{\theta}u_\theta+\csc^2{\theta}u_{\varphi\varphi})=-r^4\]
+\[\iff f''(r)+\frac{2}{r}f'(r)=-r^4\]
+
+but as previously stated the solution to the corresponding homogeneous ODE is given by Equation \ref{homo}. To solve the current problem we need only guess a particular solution. Let's try 
+
+\[f(r)=-\frac{1}{42}r^6\]
+
+\[\Rightarrow f''(r)+\frac{2}{r}f'(r)=-r^4\] So this is indeed a solution to our equation. Thus the general solution to the ODE is given by a sum of the above and Equation \ref{homo}.
+
+\[f(r)= A+\frac{B}{r} - \frac{1}{42}r^6\]
+
+Now employing our boundary conditions we see that since $f(0)$ is finite $B=0$, and moreover 
+
+\[f(a)=0\]
+\[\Rightarrow f(a)=A-\frac{1}{42}a^6=0\]
+\[\Rightarrow A=\frac{1}{42}a^6\]
+
+So our final solution, including boundary conditions is given by
+
+\[f(r)= \frac{1}{42}a^6 - \frac{1}{42}r^6\]
+
+\[f(r)= \frac{1}{42}(a^6 - r^6)\]
+
+
+
+
+\subsection{Problem 15}
+
+Find the solution $u(r;t)$ of the heat equation $u_t = K \nabla^2u$, $-\infty<t<\infty$, in the sphere $0 \leq r <a$ satisfying the boundary condition $u(a;t) = A_1 \cos{\omega(t-t_0)}$ where $A_1, \omega$ and $t_0$ are positive constants.
+
+We note that this problem has already been solved in more generality \cite[Page 239]{pinsky} and has solution
+
+\[u(r;t)=\frac{a}{r}\sum^\infty_{n=-\infty}{\alpha_n e^{i \omega_n t}\frac{e^{c_n(1+i)r}-e^{-c_n (1+i) r}}{e^{c_n(1+i)a}-e^{-c_n (1+i) a}}}\] for $\omega_n=2\pi n/T$, $c_n=\sqrt{\pi n/KT}$
+
+So all that remains is to specify the solution satisfying our boundary conditions by setting 
+
+\[u_0(t)=\sum^\infty_{n=-\infty}\alpha_n e^{t\pi i n t/T}\] and computing the fourier coeffecients $\alpha_n$.
+
+It is perhaps useful to first solve this problem for $t_0=0$.
+
+In this case it is easy to see that since $u_0(t)=A_1\cos{\omega t}$ we have $\alpha_1=\alpha_{-1}=\frac{1}{2}A_1$ as in Example 4.1.2\cite[Page 239]{pinsky}. So, plugging in and taking the real part we see that the particular solution to this reduced problem is given by
+
+\[u(r;t)=\frac{a A_1}{r}Re\ { e^{i \omega t}\frac{e^{c(1+i)r}-e^{-c (1+i) r}}{e^{c(1+i)a}-e^{-c (1+i) a}}}\] for $c=\sqrt{\omega/2K}$. Again, this solution is very similar to the one derived in Example 4.1.2\cite[Page 239]{pinsky}. 
+
+However, the original problem is just a translation in time of the one which we have just solved.  Thus, its solution is given by 
+
+\[u(r;t)=\frac{a A_1}{r}Re\ { e^{i \omega (t-t_0)}\frac{e^{c(1+i)r}-e^{-c (1+i) r}}{e^{c(1+i)a}-e^{-c (1+i) a}}}\] for $c=\sqrt{\omega/2K}$.
+
+
+
+
+\subsection{Problem 17}
+
+Find the solution $u(r;t)$ of the heat equation $u_t = K \nabla^2u+\sigma$ in the sphere $0 \leq r <a$ satisfying the boundary condition $u(a;t)=T_1$ and the initial condition $u(r;0)=T_2$. Use the five-stage method, and find the relaxation time.
+
+Throughout we will follow the example of the book\cite[Page 242]{pinsky}.
+
+First we will reduce this problem to a one dimensional one. Since the initial and boundary conditions are both independent of $(\theta, \varphi)$ we can reasonably assume that the solution is as well. Thus, we examine solutions of the form $u=u(r;t)$. Now we define a new function $w$ by $w(r;t)=ru(r;t)$. So, $w_t=ru_t$, $w_r=ru_r+u$, $w_{rr}=ru_{rr}+2u_r=r\nabla^2u$. Multiplying the problem for $u$ by $r$ to put it in terms of $w$ we get
+
+\[ w_t=Kw_{rr}+\sigma r\]
+\[ w(a;t)=aT_1\]
+\[w(r;0)=rT_2\]
+\[w(0;t)=0\]
+for $0 \leq r <a$.
+
+This one-dimensional boundary vale problem for $w$ can now be solved by the five-stage method outlined in the text\cite[Page 242]{pinsky}.
+
+\subsubsection{Stage 1}
+
+The steady-state equation is $KW_{rr}+\sigma r=0$ with the two boundary conditions at $r=0$, $r=a$. The general solution of this ordinary differential equation is just
+\[W(r)=-\frac{\sigma r^3}{6K}+A+Br\]
+for arbitrary constants $A, B$. The boundary condition $W(0)=0$ requires that $A=0$. To determine $B$ we take
+\[W(a)=-\frac{\sigma a^3}{6K}+B a = a T_1\]
+\[\Rightarrow -\frac{\sigma a^2}{6K}+B  =  T_1\]
+\[\Rightarrow B  =  T_1+\frac{\sigma a^2}{6K}\]
+substituting our constants into the general solution we get
+\[W(r)=-\frac{\sigma r^3}{6K}+r\left(T_1+\frac{\sigma a^2}{6K}\right)\]
+
+
+\subsubsection{Stage 2}
+
+We use the steady-state solution to transform the problem. Letting $v(r;t)=w(r;t)-W(r)$, we have the equation for $v$:
+
+\[v_t=Kv_{rr}\]
+\[v(0;t)=0\]
+\[v(a;t)=0\]
+\[v(r;0)=\frac{\sigma r^3}{6K}-r\left(T_1-T_2+\frac{\sigma a^2}{6K}\right)\]
+
+\subsubsection{Stage 3}
+Now we determine the separated solutions to the problem for $v$. We write $v(r;t)=R(r)T(t)$ yielding the equations $T'+\lambda K T = 0$, $R''+\lambda R=0$ with boundary conditions $R(0)=0$, $R(a)=0$. The first equation can be solved with a constant by $T(t)=e^{-\lambda K t}$. The equation for $R(r)$ is a Sturm-Liouville eigenvalue problem,
+\[R''+\lambda R=0 \]
+\[R(0)=0\]
+\[R(a)=0\]
+which has solutions as in Example 1.6.1\cite[Page 85]{pinsky} given by 
+\[\lambda_n=\left(\frac{n\pi}{a}\right)^2,\ \phi_n(x)=\sin{\frac{n\pi r}{a}}\ n=1,2,\dots\]
+
+Now we can write the superposition of separated solutions as
+\begin{equation}\label{super}v(r;t)=\sum_{n=1}^\infty A_n \sin{\frac{n\pi r}{a}} e^{-\lambda_n K t}\end{equation}
+
+By Theorem 1.5\cite[Page 86]{pinsky}, the eigenfunctions must be orthogonal. Thus,
+
+\[\int_0^a \sin{\frac{m\pi r}{a}} \sin{\frac{n\pi r}{a}} dr =0 \ n\neq m\]
+
+
+The normalization can be computed as an integral
+
+\[\int_0^a \sin^2{\frac{m\pi r}{a}}  dr = \frac{1}{2} \int_0^a \left(1- \cos{ \frac{2 m\pi r}{a}} \right) dr\]
+\[= \left[\frac{r}{2}-\frac{a \sin{\left(\frac{2 m \pi  r}{a}\right)}}{4 m \pi }\right]_0^a \]
+\[=\frac{a}{2} \left(1-\frac{ \sin{2 m \pi }}{2 m \pi }\right)\]
+
+The Fourier Coefficients $A_n$ can be determined by setting $t=0$ in Equation \ref{super}, multiplying by $\sin{\frac{n\pi r}{a}}$ and integrating; that is
+
+\[\int_0^a\left(\frac{\sigma r^3}{6K}-r\left(T_1-T_2+\frac{\sigma a^2}{6K} \right) \right) \sin{\frac{n\pi r}{a}}dr = A_n \int_0^a \sin^2{\frac{n\pi r}{a}}  dr \]
+\[=\frac{A_n a}{2} \left(1-\frac{ \sin{2 n \pi }}{2 n \pi }\right)\]
+\[\Rightarrow \frac{1}{3 K n^4 \pi ^4}a^2 (3 n \pi  \left(K n^2 \pi ^2 (T_1-T_2)+a^2 \sigma \right) \cos{n \pi }+\]
+\[\left(3 K n^2 \pi ^2 (-T_1+T_2)+a^2 \left(-3+n^2 \pi ^2\right) \sigma \right) \sin{n \pi})\]
+
+Since we are dealing only with $n \in \mathbb{N}$ we may replace $\sin{n\pi}$ with $0$ and $\cos{n\pi}$ with $(-1)^n$. Making this simplification we are left with
+
+\[\frac{1}{3 K n^4 \pi ^4}a^2 (3 n \pi  \left(K n^2 \pi ^2 (T_1-T_2)+a^2 \sigma \right) (-1)^n=\frac{A_n a}{2} \]
+
+Thus, the Fourier Coefficients $A_n$ are given by
+
+\[A_n = \frac{2 (-1)^n a(T_1-T_2)}{n \pi }+\frac{2 (-1)^n a^3 \sigma }{k n^3 \pi ^3}\]
+
+
+\subsubsection{Stage 4}
+
+We have obtained the formal solution of the problem as 
+
+\[ u(r;t)=U(r)+\frac{1}{r}\sum_{n=1}^\infty A_n \sin{\frac{n\pi r}{a}} e^{-\lambda_n K t}\]
+with
+\[U(r)=\frac{W(r)}{r}=T_1+\frac{\sigma}{6K}(a^2-r^2)\]
+\[A_n = \frac{2 (-1)^n a(T_1-T_2)}{n \pi }+\frac{2 (-1)^n a^3 \sigma }{k n^3 \pi ^3}\]
+\[\lambda_n=\left(\frac{n\pi}{a}\right)^2\]
+
+\subsubsection{Stage 5/Relaxation Time}
+When $t\to\infty$, the solution $u(r;t)$ tends to the steady-state solution $U(r)$. We use the method from Chapter 2 to estimate the rate of approach; thus using O from 2.2.3\cite[Page 113]{pinsky} we get
+\[\frac{1}{r}\sum_{n=1}^\infty A_n \sin{\frac{n\pi r}{a}} e^{-\lambda_n K t}=O( e^{-a t})\ t\to\infty\]
+
+Therefore $u(r;t)-U(r)=O( e^{-a t})$, $t\to\infty$. Finally we compute the relaxation time by noting that
+\[ u(r;t)-U(r)= \frac{ A_1 \sin{\frac{\pi r}{a}}}{r} e^{-\lambda_1 K t}+O( e^{-a t})\ t\to\infty\]
+
+If $A_1 \neq 0$ the relaxation time is given by 
+
+\[\tau=\frac{1}{\lambda_1 K}=\frac{a^2}{\pi^2 K}\]
+
+
+
+\section{Chapter 5 Section 1}
+In the following problems we compute the Fourier Transform of the given function $f(x)$.
+\subsection{Problem 1}
+
+ \begin{displaymath}
+   f(x) = \left\{
+     \begin{array}{lr}
+       1 & : x \in (-2,2)\\
+       0 & : otherwise
+     \end{array}
+   \right.
+	\end{displaymath} 
+
+
+So we proceed employing the given definition for the Fourier Transform\cite[Page 278]{pinsky}:
+
+$$F ( \mu ) = \frac{1}{2\pi} \int_{-\infty}^\infty f(x) e^{i \mu x} dx$$
+
+Since the function $f$ is zero except on the interval $x \in (-2,2)$ we may restrict the limits of our integration to this region. 
+
+Plugging in to the definition yields:
+
+$$F(\mu)=\frac{1}{2\pi}\int_{-2}^2e^{i\mu x}dx$$
+
+Now we evaluate the antiderivative to get
+
+$$F(\mu)=\frac{1}{2\pi}\left[-\frac{i e^{i x \mu }}{\mu}\right]_{-2}^2$$
+
+$$=\frac{1}{2\pi}\left(\frac{i e^{-2 i \mu }}{\mu }-\frac{i e^{2 i \mu }}{\mu }\right)$$
+
+$$=\frac{2}{\pi\mu}\left(\frac{i e^{-2 i \mu }-i e^{2 i \mu }}{4 }\right)$$
+
+$$=\frac{2}{\pi\mu}\left(\frac{e^{2 i \mu }- e^{-2 i \mu } }{4 i }\right)$$
+
+Since the numerator is just a difference of two squares so we can express this as
+
+$$\frac{2}{\pi\mu}\left(\frac{(e^{ i \mu }+ e^{- i \mu })(e^{ i \mu }- e^{- i \mu }) }{4 i }\right)$$
+
+$$=\frac{2}{\pi\mu}\left(\frac{e^{ i \mu }+ e^{- i \mu }}{2 }\right)\left(\frac{e^{ i \mu }- e^{- i \mu } }{2i }\right)$$
+
+$$=\frac{2}{\pi\mu}\cos{\mu}\sin{\mu}$$
+
+So, the Fourier Transform of the given function is
+
+$$F(\mu)=\frac{2}{\pi\mu}\cos{\mu}\sin{\mu}$$
+
+\subsection{Problem 3}
+
+ \begin{displaymath}
+   f(x) = \left\{
+     \begin{array}{lr}
+       e^{-3x} & : x >0 \\
+       e^{2x} & : x<0
+     \end{array}
+   \right.
+	\end{displaymath} 
+
+Again we use the definition for the Fourier Transform:
+
+$$F ( \mu ) = \frac{1}{2\pi} \int_{-\infty}^\infty f(x) e^{i \mu x} dx$$
+
+But clearly this is equivalent to 
+
+\begin{equation}\label{split}
+F ( \mu ) = \frac{1}{2\pi}\left( \int_{-\infty}^0 f(x) e^{i \mu x} dx+ \int_{0}^\infty f(x) e^{i \mu x} dx\right)
+\end{equation}
+
+Now we can plug in with our particular $f$
+
+$$F ( \mu ) = \frac{1}{2\pi}\left( \int_{-\infty}^0 e^{2x} e^{i \mu x} dx+ \int_{0}^\infty e^{-3x} e^{i \mu x} dx\right)$$
+
+$$= \frac{1}{2\pi}\left( \int_{-\infty}^0  e^{2x+ i \mu x} dx+ \int_{0}^\infty e^{i \mu x - 3x} dx\right)$$
+
+Now we compute the antiderivative yielding
+
+$$ \frac{1}{2\pi}\left( \left[  -\frac{i e^{x (2+i \mu )}}{-2 i+\mu } \right]_{-\infty}^0 + \left[ -\frac{i e^{i x (3 i+\mu )}}{3 i+\mu } \right]_{0}^\infty \right)$$
+
+$$ =\frac{1}{2\pi}\left( \left[  \frac{ e^{x (2+i \mu )}}{2 +i\mu } \right]_{-\infty}^0 + \left[ \frac{ e^{i x (3 i+\mu )}}{-3 +i\mu } \right]_{0}^\infty \right)$$
+
+
+Now, since 
+
+$$\lim_{x \to -\infty}{ \frac{ e^{x (2+i \mu )}}{2 +i\mu }}=0=\lim_{x \to \infty}{ \frac{ e^{i x (3 i+\mu )}}{-3 +i\mu }}$$
+
+we evaluate at the integration limits to get
+
+$$ \frac{1}{2\pi}\left(   \frac{ 1}{2 +i\mu }  - \frac{ 1}{-3 +i\mu }  \right)$$
+
+$$=\frac{5}{2 \pi  \left(6+i \mu +\mu ^2\right)}$$
+
+So, the Fourier Transform of the given function is
+
+$$F(\mu)=\frac{5}{2 \pi  \left(6+i \mu +\mu ^2\right)}$$
+
+
+\subsection{Problem 5}
+
+$$f(x)=\cos{x}e^{-|x|}$$
+
+So, by Equation \ref{split} the Fourier Transform of this function is
+
+$$F ( \mu ) = \frac{1}{2\pi}\left( \int_{-\infty}^0 f(x) e^{i \mu x} dx+ \int_{0}^\infty f(x) e^{i \mu x} dx\right)$$
+
+$$= \frac{1}{2\pi}\left( \int_{-\infty}^0 \cos{x}e^{-|x|} e^{i \mu x} dx+ \int_{0}^\infty \cos{x}e^{-|x|} e^{i \mu x} dx\right)$$
+
+Since in each of these ranges of integration we are guaranteed $x<0, x>0$ respectively we may replace $|x|$ with $-x, x$ respectively yielding
+
+$$\frac{1}{2\pi}\left( \int_{-\infty}^0 \cos{x}e^{x} e^{i \mu x} dx+ \int_{0}^\infty \cos{x}e^{-x} e^{i \mu x} dx\right)$$
+
+$$= \frac{1}{2\pi}\left( \int_{-\infty}^0 \cos{x}e^{i \mu x+x} dx+ \int_{0}^\infty \cos{x} e^{i \mu x-x} dx\right)$$
+
+Integrating this expression we get 
+
+$$= \frac{1}{2\pi}(  \left[ -\frac{i e^{x+i x \mu } }{-2-2 i \mu +\mu ^2}((-i+\mu ) \cos{x}-i \sin{x}) \right]_{-\infty}^0$$
+$$+ \left[ \frac{e^{i x (i+\mu )}}{-2+2 i \mu +\mu ^2} (\cos{x}-i \mu  \cos{x}-\sin{x})  \right]_{0}^\infty  )$$
+
+As before we observe that the $lim_{x \to \infty}$, $\lim_{x \to -\infty}$ of the respective expressions is $0$. Therefore, evaluating at the limits of integration we get
+
+$$\frac{1}{2\pi} \left(   -\frac{i}{-2-2 i \mu +\mu ^2}((-i+\mu )) - \frac{1}{-2+2 i \mu +\mu ^2} (1-i \mu )    \right)$$
+
+$$=\frac{2+\mu ^2}{4 \pi +\pi  \mu ^4}$$
+
+So we have computed the Fourier Transform of the given function
+
+\[F(\mu)=\frac{2+\mu ^2}{4 \pi +\pi  \mu ^4}\]
+
+\subsection{Problem 7}
+
+\[f(x)=\frac{2x}{{(1+x^2)}^2}\]
+
+We observe that it is very difficult to compute the integral in the definition of the Fourier Transform for this $x$. However, if we realize that
+
+\[\frac{d}{dx}\frac{-1}{(-1)^2+x^2}=f(x)\]
+
+and employ the relationship between the Fourier Transform of a function and that of its derivative outlined in \cite[Page 280]{pinsky} then this problem becomes much easier. 
+
+Call 
+
+\[g(x)=\frac{-1}{(-1)^2+x^2}\]
+
+Since $g(x)$ is of the form $g(x)=a/(a^2+x^2)$ its Fourier Transform is given by $G(\mu)=\frac{1}{2}e^{-a|\mu|}=\frac{1}{2}e^{|\mu|}$\cite[Page 285]{pinsky}. Moreover we have by the aforementioned relationship $\frac{d}{dx}g(x)=f(x) \Rightarrow i\mu G(\mu)=F(\mu)$ where $F(\mu)$ is the Fourier Transform of $f(x)$.
+
+Thus, the Fourier Transform of the given function is
+
+\[F(\mu)=\frac{i\mu}{2}e^{-|\mu|} \]
+
+\subsection{Problem 9}
+
+\[f(x)=\cos{x}e^{-x^2/2}\]
+
+Again this problem can be greatly simplified by expressing $f(x)$ in terms of other functions whose Fourier Transforms are known. First let us replace Cosine by its definition in terms of complex powers of e, that is
+
+\[f(x)=\frac{1}{2}\left(e^{i x}+e^{-i x}\right)e^{-x^2/2}\]
+
+Now, write 
+
+\[g(x)=e^{-x^2/2}\]
+
+\[f(x)=\frac{1}{2}\left(e^{i x}+e^{-i x}\right)g(x)\]
+
+\[=\frac{1}{2}e^{i x}g(x)+\frac{1}{2}e^{-i x}g(x)\]
+
+but now, we can employ linearity, phase factor \cite[Page 280]{pinsky} to rewrite the Fourier Transform as
+
+\[\frac{1}{2}G(\mu+1)+\frac{1}{2}G(\mu-1)\]
+
+where $G(\mu)$ is the Fourier Transform of $g(x)$.
+
+Now recall that $g(x)=e^{-x^2/2}$, and observe that this is just a multiple of a special case of the general Gaussian distribution whose Fourier Transform is worked out in detail \cite[Page 282]{pinsky} already. In particular we observe that the Fourier Transform $G(\mu)$ is given by
+
+\[\sqrt{2\pi}G(\mu)=e^{-\mu^2/2}\]
+\[\Rightarrow G(\mu)=\frac{e^{-\mu^2/2}}{\sqrt{2\pi}}\]
+
+
+Thus the Fourier Transform of $f(x)$, $F(\mu)$ is given by,
+
+\[F(\mu)=\frac{1}{2}G(\mu+1)+\frac{1}{2}G(\mu-1)\]
+
+\[=\frac{1}{2}\frac{e^{-(\mu+1)^2/2}}{\sqrt{2\pi}}+\frac{1}{2}\frac{e^{-(\mu-1)^2/2}}{\sqrt{2\pi}}\]
+
+\[=\frac{1}{2\sqrt{2\pi}}\left(e^{-\frac{1}{2}(\mu+1)^2}+e^{-\frac{1}{2}(\mu-1)^2}\right)\]
+
+
+
+\begin{thebibliography}{9}
+
+	\bibitem{pinsky}
+	  Mark Pinsky,
+	  \emph{Partial Differential Equations and Boundary Value Problems with Applications}.
+	  Waveland Press, Illinois,
+	  3rd Edition,
+	  2003.
+
+\end{thebibliography}
+
+
+\end{document}

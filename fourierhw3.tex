@@ -1,0 +1,277 @@
+\documentclass[12pt]{article}
+\setlength\headheight{14.5pt}
+\title{Homework}
+\author{Frederick Robinson}
+\date{30 November 2009}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+
+\begin{document}
+
+\lhead{Frederick Robinson}
+\rhead{Math 381: Fourier Analysis}
+
+   \maketitle
+
+\setcounter{tocdepth}{2} 
+
+\tableofcontents
+
+\section{Chapter 5 Section 3}
+
+\subsection{Problem 9}
+\subsubsection{Question}
+Find the bounded solution of Laplace's equation $u_{xx}+u_{yy}=0$ in the half plane $y>0$ satisfying hte boundary conditions $u(x,0)=2$ if  $-4<x<4$ and $u(x,0)=0$ otherwise.
+
+\subsubsection{Answer}
+We begin by noting that the explicit representation of the solution is given by \cite[Page 333 5.3.19]{pinsky} as
+\[u(x,y)=\frac{1}{\pi}\int_{-\infty}^\infty \frac{y}{y^2+(x-\xi)^2} f(\xi) d\xi\]
+
+Since, in our case $f(\xi)$ is uniformly zero outside $(-4,4)$ and $2$ on this region the above integration reduces to
+\[u(x,y)=\frac{2}{\pi}\int_{-4}^4 \frac{y}{y^2+(x-\xi)^2} d\xi\]
+and if we make the substitution $v=(\xi-x)/y$ we have $d\xi=y dv$ and our integration reduces still further to
+\[\frac{2}{\pi} \int_{(-4-x)/y}^{(4-x)/y} \frac{1}{1+v^2} dv\]
+\[=\frac{2}{\pi} \left( \tan^{-1}{\frac{4-x}{y}} - \tan^{-1}{\frac{-4-x}{y}} \right)\]
+and exploiting the oddness of the tangent function we can rewrite this as 
+\[\frac{2}{\pi} \left( \tan^{-1}{\frac{4-x}{y}} + \tan^{-1}{\frac{4+x}{y}} \right)\]
+
+
+
+\subsection{Problem 11}
+
+\subsubsection{Question}
+Consider the problem of solving Laplace's equation $u_{xx}+y_{yy}=0$ in the quadrant $x>0$, $y>0$, with boundary conditions $u(x,0) = f(x)$, $u_x (0,y)=0$. By combining the method of images with Theorem 5.9, find an explicit representation of the solution.
+
+
+
+\subsubsection{Answer}
+First we recall what Theorem 5.9 states:
+
+Suppose $f(x)$, $-\infty<x<\infty$, is bounded and piecewise continuous then the integral
+\[\frac{1}{\pi} \int_{-\infty}^\infty \frac{y}{y^2+(x-\xi)^2} f(\xi) d\xi\]
+defines a solution of Laplace's equation $u_{xx}+u_{yy}=0$ satisfying the boundary conditions that $\lim_{y \to 0} u(x,y)=\frac{1}{2} f(x+0)+\frac{1}{2}f(x-0)$.
+
+Now we need only employ the method of images. Extend the given function $f(x)$ to the x axis as an even function since $u_x(0,y)=0$. Explicitly we have 
+\[u(x,0)=\hat{f}=\left\{\begin{array}{lr} f(x) & x>0 \\ f(-x) & x <0 \end{array} \right. \]
+
+Now we apply Theorem 5.9 from above using our newly defined $\hat{f}$ instead of $f$.
+\[ \frac{1}{\pi} \left( \int_{-\infty}^0 \frac{y}{y^2+(x-\xi)^2} \hat{f}(\xi) d\xi + \int_{0}^\infty \frac{y}{y^2+(x-\xi)^2} \hat{f}(\xi) d\xi \right) \]
+substituting for $f$ as above yields in particular
+\[ \frac{1}{\pi} \left( \int_{-\infty}^0 \frac{y}{y^2+(x-\xi)^2} f(-\xi) d\xi + \int_{0}^\infty \frac{y}{y^2+(x-\xi)^2} f(\xi) d\xi \right) \]
+substituting $\xi$ for $-\xi$ in the first integral we get
+\[ \frac{1}{\pi} \left( \int_0^{\infty} \frac{y}{y^2+(x+\xi)^2} f(\xi) d\xi + \int_{0}^\infty \frac{y}{y^2+(x-\xi)^2} f(\xi) d\xi \right) \]
+\[= \frac{1}{\pi}  \int_0^{\infty}\left( \frac{y}{y^2+(x+\xi)^2}  + \frac{y}{y^2+(x-\xi)^2} \right) f(\xi) d\xi  \]
+
+
+\subsection{Problem 13}
+\subsubsection{Question}
+Consider the problem of solving Laplace's equation $u_{xx}+u_{yy}=0$ in the strip $0<x<L$, $0<y<\infty$, with the boundary conditions $u(x,0)=f(x)$, $u(0,y)=0$, $u(L,y)=0$. Find the Fourier (series) representation of the bounded solution of this problem.
+
+\subsubsection{Answer}
+Given some fixed $y$ the solution in terms of $x$ should be expressible as a Fourier series. In particular we should be able to express $u(x)$ as a Fourier Sine series since we have the boundary condition that for each choice of $y$ $u(0)=u(L)=0$. Thus we look for solutions of the form
+\[u(x,y)=\left( \sum_{n=1}^\infty B_n \sin{\frac{n\pi x}{L}}\right) g(y)\]
+
+But since $u$ must satisfy the Laplace equation $u_{xx}+u_{yy}=0$ we have in particular that 
+\[-g(y)\sum_{n=1}^\infty \left( \frac{n \pi}{L} \right)^2  B_n \sin{\frac{n \pi x}{L}} + g''(y) \sum_{n=1}^\infty B_n \sin{\frac{n\pi x}{L}} = 0 \]
+and thus we observe that 
+\[-g(y)  \left( \frac{n \pi}{L} \right)^2  +g''(y) = 0\]
+and we know from ODE theory that the solution to this ordinary differential equation is given by
+\[g(y)=C e^{\pm \frac{n\pi}{L} y}\]
+Thus, since the solution must be bounded we get just
+\[g(y)=C e^{- \frac{n\pi}{L} y}\]
+and our solution is
+\[u(x,y)= \sum_{n=1}^\infty B_n \sin{\frac{n\pi x}{L}} e^{- \frac{n\pi}{L} y}\]
+
+Now we just employ our boundary conditions to see that
+\[u(x,0)=f= \sum_{n=1}^\infty B_n \sin{\frac{n\pi x}{L}} \]
+but then clearly our $B_n$ are just the coefficients for the sine series corresponding to $f$
+
+So to compute these we just make the usual extension of $f$ and integrate yielding
+\[B_n=\frac{2}{L} \int_0^L f(x) \sin{\frac{n \pi x}{L}} dx\]
+
+In summary, our solution is 
+\[u(x,y)= \sum_{n=1}^\infty B_n \sin{\frac{n\pi x}{L}} e^{- \frac{n\pi}{L} y}\]
+with $B_n$ given by
+\[B_n=\frac{2}{L} \int_0^L f(x) \sin{\frac{n \pi x}{L}} dx\]
+
+
+\section{Chapter 5 Section 4}
+
+\subsection{Problem 1}
+\subsubsection{Question}
+Let $u(x;t)$ be a solution of the telegraph equation $u_{tt}+2 \beta u_t +\alpha u = c^2 u_{xx} $. Show that $v(x;t) = e^{\beta t}u(x;t)$ is a solution of the equation $v_{tt}+(\alpha-\beta^2)v=c^2v_{xx}$.
+
+\subsubsection{Answer}
+We begin by computing the derivatives of the function $v$ in terms of those of $u$. Applying the product rule we observe that
+\[v_t=e^{\beta t}u_t+\beta e^{\beta t}u\]
+and moreover that
+\[v_{tt}=e^{\beta t}u_{tt}+2 \beta e^{\beta t}u_t+\beta^2 e^{\beta t} u\]
+Furthermore we can compute
+\[v_{xx}=e^{\beta t}u_{xx}\]
+
+Now all that remains is to apply these observations to the proposition which we want to prove. That is,
+\[v_{tt}+(\alpha-\beta^2)v=e^{\beta t}u_{tt}+2 \beta e^{\beta t}u_t+\beta^2 e^{\beta t} u+(\alpha-\beta^2)e^{\beta t}u\]
+\[=e^{\beta t}\left( u_{tt}+2 \beta  u_t+\beta^2   u+(\alpha-\beta^2) u \right) \]
+\[=e^{\beta t}\left( u_{tt}+2 \beta  u_t+ \alpha u \right) \]
+So, since $u$ satisfies the telegraph equation we know that
+\[-u_{tt}-2 \beta u_t -\alpha u + c^2 u_{xx}=0\]
+and so we may add this to the above equation to get
+\[e^{\beta t}\left(-u_{tt}-2 \beta u_t -\alpha u + c^2 u_{xx}+ u_{tt}+2 \beta  u_t+ \alpha u \right) \]
+\[=e^{\beta t}\left(c^2 u_{xx}\right) \]
+but this is just  $c^2 v_{xx}$. So we have shown that
+\[v_{tt}+(\alpha-\beta^2)v=c^2 v_{xx}\]
+as desired.
+
+\subsection{Problem 3}
+\subsubsection{Question}
+Solve the initial value problem for the telegraph equation
+
+\[
+\begin{array}{cc}
+u_{tt}+2 \beta u_t+ \alpha u=c^2 u_{xx} & t>0,\infty<x<\infty \\
+u(x;0)=f_1(x) & -\infty<x<\infty \\
+u_t(x;0) = 0 & -\infty<x<\infty
+\end{array}
+\]
+Consider separately the three cases $\alpha > \beta^2$, $\alpha=\beta^2$, $\alpha<\beta^2$.
+
+\subsubsection{Answer}
+To solve the initial value problem we first look for $u(x;t)$ in terms of its Fourier transform
+\[\int_{-\infty}^{\infty} U(\mu;t) e^{i\mu t} d\mu\]
+and apply the telegraph equation inside the integral to get
+\[u_{tt}+2 \beta u_t - \alpha u - c^2 u_x =\int_{-\infty}^{\infty} \left( U_{tt} +2 \beta U_t +\alpha U + c^2\mu^2 U\right) e^{i \mu x} d\mu \]
+
+So we need only solve the ordinary differential equation 
+\[U_{tt} +2 \beta U_t +\alpha U + c^2\mu^2 U=0\]
+with initial conditions $U(\mu;0)=F_1$ and $u_t(\mu;0)=0$ where $F_1$ is the fourier transform of $f_1$.
+
+To solve this equation we look for solutions of the form $e^{\gamma t}$ and obtain the quadratic equation
+\[\gamma^2 +2 \beta \gamma +(\alpha +c^2\mu^2)=0\]
+whose roots are
+\[\gamma=-\beta \pm \sqrt{\beta^2 - \alpha -c^2\mu^2}\]
+
+\subsubsection{Case 1: $\alpha>\beta^2$}
+In this case we have that both roots are complex and that the solution to our ordinary differential equation yields
+\[U(\mu;t)=K e^{ \left(-\beta \pm i \sqrt{(\alpha-\beta^2)+(c\mu)^2} \right)t}\]
+or, writing this as a summation of solutions
+\[U(\mu;t)=K e^{ -\beta t} \left( e^{\left(i \sqrt{(\alpha-\beta^2)+(c\mu)^2} \right)t} +  e^{-\left(i \sqrt{(\alpha-\beta^2)+(c\mu)^2} \right)t}  \right)\]
+recognizing the complex definition of cosine this becomes just
+\[U(\mu;t)=K e^{ -\beta t}  \cos{\left(t \sqrt{(\alpha-\beta^2)+(c\mu)^2} \right) } \]
+
+Now we may apply our initial value to get
+\[U(\mu;0)=K = F_1 \]
+and determine the fourier representation of our solution to be
+\[u(x;t)=e^{-\beta t } \int_{-\infty}^{\infty} F_1(\mu) \cos{\left(t \sqrt{(\alpha-\beta^2)+(c\mu)^2}  \right)} e^{i \mu x} d\mu\]
+
+\subsubsection{Case 2: $\alpha = \beta^2$}
+In this case we have two roots. In particular we have the complex roots 
+\[\gamma = -\beta \pm i c \mu \]
+Thus we obtain to solution to our ordinary differential equation as 
+\[ U(\mu;t)=K \left( e^{-\beta t} \left( e^{i c \mu t}+ e^{-i c \mu t}\right) \right)\]
+and again we may apply the boundary conditions to yield
+\[U(\mu; 0) = F_1  = 2 K \Rightarrow K = \frac{1}{2} F_1 \]
+
+Thus our solution is
+\[U(\mu;t)= \frac{1}{2} F_1(\mu) e^{-\beta t} \left( e^{i c \mu t} + e^{-i c \mu t} \right) \]
+and applying the definition of cosine we see that this is just equivalent to 
+\[U(\mu;t)=F_1(\mu)e^{-\beta t}\cos{c \mu t}\]
+So the fourier representation of our solution is 
+\[u(x;t)= e^{-\beta t} \int_{-\infty}^\infty F_1(\mu) \cos{\left( c \mu t\right)} e^{i \mu x} d\mu\]
+
+\subsubsection{Case 3: $\alpha < \beta^2$}
+Here we must divide further into 2 subcases. In the first of these cases the roots are both real, whereas in the second they are complex conjugates of one another.
+
+
+\textbf{Case A: } $c|\mu| \leq \sqrt{\beta^2 - \alpha}$
+
+The roots are real and given by 
+\[\gamma= -\beta \pm \sqrt{(\beta^2-\alpha)-(c \mu)^2}\]
+so the Fourier transform of the solution is given by 
+\[U(\mu;t)=K e^{-\beta t} \left( e^{t \sqrt{(\beta^2-\alpha)-(c \mu)^2} } + e^{-t \sqrt{(\beta^2-\alpha)-(c \mu)^2} } \right)\]
+
+So we employ the boundary conditions to deduce that
+\[U(\mu;0)= 2 K =F_1 \Rightarrow K= \frac{1}{2} F_1 \]
+Hence by definition of $\cosh$
+\[U(\mu;t)=F_1 e^{-\beta t}  \cosh{t \sqrt{(\beta^2-\alpha)-(c\mu)^2}} \]
+
+\textbf{Case B: } $c|\mu| > \sqrt{\beta^2 - \alpha}$
+
+In this case the roots are complex conjugates and given by 
+\[\gamma = -\beta \pm i \sqrt{(c \mu)^2-(\beta^2-\alpha)}\]
+so the fourier transform of the solution is just
+\[U(\mu;t)= K e^{-\beta t}\left( e^{t i \sqrt{(c \mu)^2-(\beta^2-\alpha)}}  + e^{-t i \sqrt{(c \mu)^2-(\beta^2-\alpha)}} \right)\]
+Now we again apply boundary conditions and observe that 
+\[U(\mu;0)= F_1= 2 K \Rightarrow K = \frac{1}{2} F_1 \]
+
+Thus, by definition of cosh we have that the fourier transform of our solution is 
+\[U(\mu;t)=F_1 e^{-\beta t} \cosh{t \sqrt{(c\mu)^2-(\beta^2-\alpha)}}\]
+
+Now that we have established solutions for the Fourier transform of the desired function in cases \textbf{A} and \textbf{B} we can combine them and exploit the definition of the Fourier transform to write the Fourier representation of the solution in \textbf{Case 3} as
+\[u(x;t)=e^{-\beta t} ( \int_{|c \mu| \geq \sqrt{\beta^2 - \alpha}} F_2(\mu) \cosh{\left(t\sqrt{(c\mu)^2-(\beta^2-\alpha)}\right)} e^{i \mu x} d\mu + \]
+\[\int_{|c \mu| < \sqrt{\beta^2 - \alpha}} F_2(\mu) \cosh{\left(t\sqrt{(\beta^2-\alpha)-(c\mu)^2}\right)} e^{i \mu x} d\mu )\]
+
+So we have solved the initial value problem in each of the cases  $\alpha<\beta^2$, $\alpha>\beta^2$, and $\alpha=\beta^2$ as desired.
+
+
+
+
+\subsection{Problem 5}
+\subsubsection{Question}
+Use the result of the previous exercise to show that under the stated conditions, the Fourier representation (5.4.5) defines a rigorous solution of the telegraph equation with $f_1=0$.
+
+\subsubsection{Answer}
+
+The fourier representation is given by 5.4.5  as
+\[u(x;t)=e^{-\beta t} \int_{-\infty}^\infty F_2(\mu) \frac{\sin{t\sqrt{(\alpha-\beta^2)_(c\mu)^2}}}{\sqrt{(\alpha-\beta^2)+(c\mu)^2}} e^{i \mu x} d\mu\]
+and the stated conditions are $\alpha>\beta^2$, $f_1=0$, and $f_2$ has three continuous derivatives that are absolutely integrable.
+
+So, by the previous result we have that
+\[\int_{-\infty}^\infty |\mu||F_2(\mu)|d\mu < \infty\]
+Moreover we can apply the derivatives of the telegraph equation under the integral in our solution to obtain.
+\[(e^{\beta t} u)_x= \int_{-\infty}^\infty F_2(\mu) \frac{\sin{t\sqrt{(\alpha-\beta^2)_(c\mu)^2}}}{\sqrt{(\alpha-\beta^2)+(c\mu)^2}} i \mu e^{i \mu x} d\mu\]
+\[(e^{\beta t} u)_{xx}= \int_{-\infty}^\infty F_2(\mu) \frac{\sin{t\sqrt{(\alpha-\beta^2)_(c\mu)^2}}}{\sqrt{(\alpha-\beta^2)+(c\mu)^2}} (i \mu)^2 e^{i \mu x} d\mu\]
+\[(e^{\beta t} u)_{tt}= - \int_{-\infty}^\infty F_2(\mu) \frac{\sin{t\sqrt{(\alpha-\beta^2)_(c\mu)^2}}}{\sqrt{(\alpha-\beta^2)+(c\mu)^2}} \left( (\alpha-\beta^2) + (c \mu)^2 \right) e^{i \mu x} d\mu\]
+so we observe that $(e^{\beta t} u)_{tt}-c^2 ( e^{\beta t} u)_{xx}+ (\alpha-\beta^2)(e^{\beta t} u)=0$ which is equivalent to the telegraph equation as desired.
+
+
+\subsection{Problem 7}
+\subsubsection{Question}
+Find the bounded time-periodic solution of the telegraph equation $u_{tt}+2 \beta u_t+\alpha u = c^2 u_{xx}$ for $x>0$, $-\infty<t<\infty$, with $u(0;t)=A \cos{\omega t}$, where $A$, $\omega$, $\alpha$, $\beta$ are real and positive.
+
+\subsubsection{Answer}
+We first take the complex separated solutions to the time periodic telegraph equation from \cite[Page 340]{pinsky} given by
+\[c \gamma \sqrt{2} = \pm \left( \sqrt{\alpha-\omega^2 + \sqrt{(\alpha-\omega^2)^2 +4\beta^2\omega^2}} + i \sqrt{- \alpha+ \omega^2 + \sqrt{(\alpha-\omega^2)^2 +4\beta^2\omega^2}} \right) \]
+So, the real-valued solutions may be obtained by 
+\[e^{\gamma x} e^{i \omega t}=e^{ \pm (\gamma_R + i \gamma_I) x} e^{i\omega t}\]
+\[=e^{ \pm \gamma_R  x} \left( \cos{(\omega t \pm \gamma_I x)} + i \sin{( \omega t \pm \gamma_I x)} \right) \]
+
+Now since we know that the desired solution is bounded for $x>0$ we choose the solution that has negative real part in the exponent. Moreover, in order to satisfy the boundary condition we must choose the solution with cosine. Thus we observe in particular that the given equation is solved by
+\[e^{-\gamma_R x} \cos{(\omega t - \gamma_I x)}\]
+and given that 
+\[ \gamma  = \pm \frac{1}{c \sqrt{2}} \left( \sqrt{\alpha-\omega^2 + \sqrt{(\alpha-\omega^2)^2 +4\beta^2\omega^2}} + i \sqrt{- \alpha+ \omega^2 + \sqrt{(\alpha-\omega^2)^2 +4\beta^2\omega^2}} \right) \]
+we have that
+\[ \gamma_I  = \pm \frac{1}{c \sqrt{2}} \left(   \sqrt{- \alpha+ \omega^2 + \sqrt{(\alpha-\omega^2)^2 +4\beta^2\omega^2}} \right) \]
+and
+\[ \gamma_R  = \pm \frac{1}{c \sqrt{2}} \left( \sqrt{\alpha-\omega^2 + \sqrt{(\alpha-\omega^2)^2 +4\beta^2\omega^2}}  \right) \]
+Hence,
+\[u(x;t)=e^{-\gamma_R x} \cos{(\omega t - \gamma_I x)}\]
+\[=exp\left(- \frac{x}{c \sqrt{2}}  \sqrt{\alpha-\omega^2 + \sqrt{(\alpha-\omega^2)^2 +4\beta^2\omega^2}}    \right)\cdot\]
+\[\cos{ \left(\omega t -  \frac{x}{c \sqrt{2}}   \sqrt{- \alpha+ \omega^2 + \sqrt{(\alpha-\omega^2)^2 +4\beta^2\omega^2}}  \right)}\]
+
+
+
+\begin{thebibliography}{9}
+
+	\bibitem{pinsky}
+	  Mark Pinsky,
+	  \emph{Partial Differential Equations and Boundary Value Problems with Applications}.
+	  Waveland Press, Illinois,
+	  3rd Edition,
+	  2003.
+
+\end{thebibliography}
+
+
+\end{document}
